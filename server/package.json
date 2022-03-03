@@ -1,0 +1,25 @@
+{
+  "name": "bev-wiz-api",
+  "version": "1.0.0",
+  "description": "API for Bev Wiz app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KIMBERLYSEDDON/bev-wiz-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KIMBERLYSEDDON/bev-wiz-api/issues"
+  },
+  "homepage": "https://github.com/KIMBERLYSEDDON/bev-wiz-api#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.3"
+  }
+}
