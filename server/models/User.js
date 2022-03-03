@@ -10,6 +10,16 @@ const userSchema = new Schema(
             minlength: 5,
             maxlength: 50
         },
+        email: { 
+            type: String, 
+            require: true,
+            validate: {
+                validator: function (e) {
+                    return /.+\@.+\..+/.test(e);
+                },
+                message: props => `${props.value} is not a valid email address.`
+            }
+        },
         password: {
             type: String,
             require: true,
