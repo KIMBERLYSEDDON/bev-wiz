@@ -9,4 +9,6 @@ const Location = () => {
     );
 }
 
+// TODO: Add style sheet
+
 export default Location;

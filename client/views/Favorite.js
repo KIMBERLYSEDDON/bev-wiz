@@ -9,4 +9,6 @@ const Favorite = () => {
     );
 }
 
+// TODO: Add style sheet
+
 export default Favorite;
