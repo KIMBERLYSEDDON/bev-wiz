@@ -1,3 +1,49 @@
+<<<<<<< HEAD
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
+
+
+const userSchema = new Schema({
+    name: {
+        type: String,
+        trim: true
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: [/.+@.+\..+/, "Must match an email address!"],
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 6,
+    }
+});
+
+// hook to compare and validate password for logging in
+userSchema.pre("save", async function (next) {
+    if (this.isNew || this.isModified("password")) {
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+    next();
+});
+
+// hook to compare and validate password for logging in
+userSchema.methods.isCorrectPassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+};
+
+
+const User = model("User", userSchema);
+=======
 const { Schema, Types, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -70,5 +116,6 @@ userSchema.methods.checkPassword = function(passwordVerify, cb) {
 };
 
 const User = model('User', userSchema);
+>>>>>>> 92f20176e43b1b9e4dbbd7ee5d96bd42e825dd33
 
 module.exports = User;
