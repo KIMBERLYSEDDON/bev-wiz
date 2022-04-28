@@ -82,11 +82,14 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('save', function(next) {
-    let user = this._doc.username;
-    this._doc.username = user.toLowerCase();
-
-    let pwd = this._doc.userPassword;
-    this._doc.userPassword = bcrypt.hashSync(pwd, 10);
+    if (this.isNew || this.isModified('username')) {
+        this.username = this.username.toLowerCase();
+    }
+    
+    if (this.isNew || this.isModified('password')) {
+        const saltRounds = 10;
+        this.password = bcrypt.hashSync(this.password, saltRounds);
+    }
     next();
 });
 

@@ -1,5 +1,7 @@
 const router = require('express').Router();
+const userRoutes = require('./user-routes');
 
-// TODO: add individual routes for different table requests
+// /api/users
+router.use('/users', userRoutes)
 
 module.exports = router;
