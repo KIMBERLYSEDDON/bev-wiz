@@ -4,10 +4,10 @@ const {
     loginUser
 } = require('../../controllers/user-controller');
 
-// /api/users
-router.route('/').post(signupUser);
+// /api/users/signup
+router.route('/signup').post(signupUser);
 
-// /api/users/:username
-router.route('/:username').post(loginUser);
+// /api/users/login
+router.route('/login').post(loginUser);
 
 module.exports = router;

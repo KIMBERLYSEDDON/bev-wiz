@@ -35,7 +35,7 @@ const userController = {
             }
             
             const user = await User.findOne({
-                username: req.params.username
+                username: req.body.username
             });
 
             if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
