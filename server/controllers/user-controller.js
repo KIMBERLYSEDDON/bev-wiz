@@ -30,10 +30,6 @@ const userController = {
     },
     async loginUser(req, res) {
         try {
-            if (!req.body.username || !req.body.password) {
-                throw new Error('Username or password is incorrect.');
-            }
-            
             const user = await User.findOne({
                 username: req.body.username
             });
