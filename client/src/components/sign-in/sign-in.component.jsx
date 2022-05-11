@@ -1,6 +1,9 @@
+/*glabal google*/
 import React from "react";
 
 import { Box, TextField, Typography, Button } from "@mui/material/";
+
+import { GoogleLogin } from "react-google-login";
 
 import { useFormik } from "formik";
 
@@ -39,6 +42,13 @@ export default function SignIn() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  const handleFailure = (result) => {
+    alert(result);
+  };
+  const handleLogin = (googleData) => {
+    console.log(googleData);
+  };
   return (
     <Box className="sign-in">
       <Typography variant="h3">Sign In</Typography>
@@ -76,14 +86,23 @@ export default function SignIn() {
         {formik.touched.password && formik.errors.password ? (
           <div className="errors">{formik.errors.password}</div>
         ) : null}
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          style={{ marginTop: "8px" }}
-        >
-          Sign In
-        </Button>
+        <Box className="login-btns-container">
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            style={{ marginTop: "8px" }}
+          >
+            Sign In
+          </Button>
+          <GoogleLogin
+            clientId="375492864563-ggneos781k89kl8hv6vpeltgr4mv5q1i.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            onSuccess={handleLogin}
+            onFailure={handleFailure}
+            cookiePolicy={"single_host_origin"}
+          />
+        </Box>
       </Box>
     </Box>
   );
