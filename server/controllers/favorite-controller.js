@@ -16,7 +16,7 @@ const favoriteController = {
         }
 
         const favoriteObj = {
-            favoriteId,
+            favoriteId: favoriteId.trim(),
             userId: id,
         };
 
