@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const {
-    signupUser,
-    loginUser
-} = require('../../controllers/user-controller');
+    addFavorite,
+    removeFavorite,
+} = require('../../controllers/favorite-controller');
 
-// /api/users/signup
-router.route('/signup').post(signupUser);
+// /api/favorites
+router.route('/').post(addFavorite);
 
 // /api/users/login
-router.route('/login').post(loginUser);
+router.route('/remove').post(removeFavorite);
 
 module.exports = router;
