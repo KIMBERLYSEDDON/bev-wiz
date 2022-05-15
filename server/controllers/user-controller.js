@@ -7,15 +7,15 @@ const userController = {
     async signupUser(req, res) {
         try {
             const { username, email, password, name } = req.body;
-            if (!username || !email || !password || !name) {
+            if (!username || !email || !password) {
                 throw new Error('Missing required fields.');
             }
 
             const userObj = {
-                username: username,
-                email: email,
-                password: password,
-                name: name
+                username: username.trim().toLowerCase(),
+                email: email.trim().toLowerCase(),
+                password: password.trim(),
+                name: name ? name.trim().toLowerCase() : "User",
             };
 
             const user = new User(userObj);
@@ -40,10 +40,10 @@ const userController = {
             }
 
             const user = await User.findOne({
-                username: req.body.username
+                username: username.trim().toLowerCase()
             });
 
-            if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
+            if (!user || !bcrypt.compareSync(password.trim(), user.password)) {
                 throw new Error('Username or password is incorrect.');
             }
 
