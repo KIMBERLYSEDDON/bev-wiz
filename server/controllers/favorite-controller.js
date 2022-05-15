@@ -45,6 +45,20 @@ const favoriteController = {
 
         res.send("success");
     },
+    async getMyFavorites(req, res) {
+        const { authorization } = req.headers;
+        const { id } = jwt_decode(authorization);
+
+        if (!id) {
+            throw new Error('User must be signed in.');
+        }
+
+        const favorites = await Favorite.findAll({
+            where: { userId: id },
+        });
+
+        res.send({ favorites: favorites });
+    },
 };
 
 module.exports = favoriteController;
