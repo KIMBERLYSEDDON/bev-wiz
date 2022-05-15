@@ -31,6 +31,12 @@ const userSchema = new Schema({
     minlength: 1,
     maxlength: 50,
   },
+  favorites: [
+    {
+      type: Types.ObjectId,
+      ref: 'Favorite',
+    }
+  ],
 });
 
 userSchema.pre("save", function (next) {
