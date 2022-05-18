@@ -1,0 +1,49 @@
+.side-nav {
+  display: flex;
+  position: absolute;
+  left: 0;
+
+  .iconBtn {
+    height: fit-content;
+
+    .hide {
+      transition: 0.25s ease-in-out;
+      display: none;
+    }
+  }
+
+  .menu-nav-icon {
+    font-size: 72px;
+    color: black;
+  }
+
+  .side-nav-collapse {
+    visibility: collapse;
+    margin-left: -62px;
+    width: fit-content;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: 0.25s ease-in-out;
+    border-right: 6px solid black;
+
+    .nav-icon {
+      font-size: 48px;
+      color: black;
+    }
+  }
+
+  .show {
+    visibility: visible;
+    margin-left: 0px;
+
+    button {
+      #nav-arrow {
+        transform: rotateX(-180deg);
+        transition-duration: 0.5s;
+      }
+    }
+  }
+}
