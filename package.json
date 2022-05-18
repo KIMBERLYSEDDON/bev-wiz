@@ -1,0 +1,34 @@
+{
+  "name": "bev-wiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run develop",
+    "start:prod": "cd server && npm start",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimberlyseddon/bev-wiz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kimberlyseddon/bev-wiz/issues"
+  },
+  "homepage": "https://github.com/kimberlyseddon/bev-wiz#readme",
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.25.2",
+    "if-env": "^1.0.4",
+    "react": "^17.0.2"
+  }
+}
