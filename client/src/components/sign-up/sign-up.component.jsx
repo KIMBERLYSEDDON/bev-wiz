@@ -4,6 +4,8 @@ import { Box, TextField, Typography, Button } from "@mui/material/";
 
 import { useFormik } from "formik";
 
+import axios from "axios";
+
 import "./sign-up.styles.scss";
 
 export default function SignUp() {
@@ -49,7 +51,24 @@ export default function SignUp() {
       <Box
         component="form"
         className="sign-up-form"
-        onSubmit={formik.handleSubmit}
+        onSubmit={async ( values ) => {
+          const formData = {
+            username: values.username,
+            email: values.email,
+            password: values.password,
+            name: values.name,
+          }
+
+          await axios.post(`/api/users/signup`, formData)
+            .then((data) => {
+              if (data.token) {
+                localStorage.setItem("token", data.token);
+              } else {
+                alert(data);
+              }
+            })
+            .catch((err => console.error(err)));
+        }}
       >
         <TextField
           onChange={formik.handleChange}

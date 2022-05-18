@@ -27,7 +27,7 @@ const userController = {
             }
 
             const token = jwt.sign({ id: user._id }, process.env.SECRET);
-            res.json(token);
+            res.json({ token: token });
         } catch (err) {
             res.status(500).json(err);
         }
@@ -48,7 +48,7 @@ const userController = {
             }
 
             const token = jwt.sign({ id: user._id }, process.env.SECRET)
-            res.json(token);
+            res.json({ token: token });
         } catch (err) {
             res.status(500).json(err);
         }
