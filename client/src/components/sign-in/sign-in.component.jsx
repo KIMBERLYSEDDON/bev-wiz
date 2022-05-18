@@ -1,15 +1,29 @@
-/*glabal google*/
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Box, TextField, Typography, Button } from "@mui/material/";
 
 import { GoogleLogin } from "react-google-login";
 
+import { gapi } from "gapi-script";
+
 import { useFormik } from "formik";
 
 import "./sign-in.styles.scss";
 
+const googleClientId =
+  "375492864563-ggneos781k89kl8hv6vpeltgr4mv5q1i.apps.googleusercontent.com";
+
 export default function SignIn() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: googleClientId,
+        scope: "",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  });
   const validate = (values) => {
     const errors = {};
 
@@ -43,11 +57,11 @@ export default function SignIn() {
     },
   });
 
-  const handleFailure = (result) => {
-    alert(result);
+  const onFailure = (res) => {
+    console.log(res);
   };
-  const handleLogin = (googleData) => {
-    console.log(googleData);
+  const onSuccess = (res) => {
+    console.log("hit", res.profileObj);
   };
   return (
     <Box className="sign-in">
@@ -96,10 +110,10 @@ export default function SignIn() {
             Sign In
           </Button>
           <GoogleLogin
-            clientId="375492864563-ggneos781k89kl8hv6vpeltgr4mv5q1i.apps.googleusercontent.com"
+            clientId={googleClientId}
             buttonText="Login with Google"
-            onSuccess={handleLogin}
-            onFailure={handleFailure}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
           />
         </Box>
