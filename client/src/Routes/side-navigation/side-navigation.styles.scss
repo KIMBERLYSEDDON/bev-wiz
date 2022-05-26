@@ -2,9 +2,24 @@
   display: flex;
   position: absolute;
   left: 0;
+  width: 5%;
 
-  .iconBtn {
+  .hide {
+    pointer-events: none;
+  }
+
+  .menuBtn {
     height: fit-content;
+    margin-left: -18px;
+
+    .menu-nav-icon {
+      position: absolute;
+      font-size: 72px;
+      color: black;
+      width: fit-content;
+      left: 18px;
+      top: 2px;
+    }
 
     .hide {
       transition: 0.25s ease-in-out;
@@ -12,14 +27,9 @@
     }
   }
 
-  .menu-nav-icon {
-    font-size: 72px;
-    color: black;
-  }
-
   .side-nav-collapse {
     visibility: collapse;
-    margin-left: -62px;
+    margin-left: -64px;
     width: fit-content;
     height: 100vh;
     display: flex;
@@ -38,12 +48,5 @@
   .show {
     visibility: visible;
     margin-left: 0px;
-
-    button {
-      #nav-arrow {
-        transform: rotateX(-180deg);
-        transition-duration: 0.5s;
-      }
-    }
   }
 }
