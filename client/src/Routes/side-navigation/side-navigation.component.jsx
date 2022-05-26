@@ -42,11 +42,13 @@ export default function SideNav() {
           </Link>
         </Box>
         <IconButton
-          className={`iconBtn ${open && "hide"}`}
+          className={`menuBtn ${open && "hide"}`}
           onClick={handleOpenClose}
           disableRipple
         >
-          <MenuRoundedIcon className={`menu-nav-icon ${open && "hide"}`} />
+          <MenuRoundedIcon
+            className={`menu-nav-icon ${open ? "hide" : "show"}`}
+          />
         </IconButton>
       </Box>
       <Outlet />

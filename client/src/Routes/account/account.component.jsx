@@ -1,9 +1,11 @@
 import React from "react";
 
+import { Box, Typography } from "@mui/material/";
+
 export default function UserAccount() {
   return (
-    <div className="side-display">
-      <h1>User Account Page Here</h1>
-    </div>
+    <Box className="side-display">
+      <Typography variant="h1">User Account Page Here</Typography>
+    </Box>
   );
 }
