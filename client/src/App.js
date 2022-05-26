@@ -1,13 +1,13 @@
-import "./App.css";
+import { BrowserRouter } from "react-router-dom";
 
-import SignInSignUp from "./pages/sign-in-and-sign-up/sign-in-sign-up.component";
-import SideNav from "./components/side-navigation/side-navigation.component";
+import BevWizRoutes from "./Routes/routes";
 
 function App() {
   return (
     <div className="App">
-      <SideNav />
-      <SignInSignUp />
+      <BrowserRouter>
+        <BevWizRoutes />
+      </BrowserRouter>
     </div>
   );
 }
