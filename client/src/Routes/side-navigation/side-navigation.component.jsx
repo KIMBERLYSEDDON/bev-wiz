@@ -28,14 +28,14 @@ export default function SideNav() {
           <IconButton onClick={handleOpenClose} disableRipple>
             <ArrowBackIosNewRoundedIcon className="nav-icon" />
           </IconButton>
+          <Link to="/">
+            <HomeRoundedIcon className="nav-icon" />
+          </Link>
           <Link to="/night-in">
             <LiquorRoundedIcon className="nav-icon" />
           </Link>
           <Link to="/night-out">
             <NightlifeRoundedIcon className="nav-icon" />
-          </Link>
-          <Link to="/">
-            <HomeRoundedIcon className="nav-icon" />
           </Link>
           <Link to="/account">
             <AccountBoxRoundedIcon className="nav-icon" />
