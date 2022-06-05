@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Box, TextField, Typography, Button } from "@mui/material/";
@@ -14,20 +14,8 @@ import "./mutual-form.styles.scss";
 
 const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2,
-    },
-  },
-};
-
 export default function MutualForm() {
-  const [loginPage, setLoginPage] = useState(false);
+  const [signUpPage, setSignUpPage] = useState(false);
 
   useEffect(() => {
     function start() {
@@ -82,30 +70,66 @@ export default function MutualForm() {
   };
 
   const onSuccess = (res) => {
-    console.log("hit", res.profileObj);
+    console.log("Successfully signed in with Google account", res.profileObj);
   };
+
   return (
     <Box className="sign-in-sign-up">
       <Typography variant="h2">
-        {loginPage ? "Create an account below" : "Welcome Back!"}
+        {signUpPage ? "Create an account below" : "Welcome Back!"}
       </Typography>
       <Button
         disableRipple={true}
         disableFocusRipple={true}
         color="secondary"
         sx={{ fontSize: "12px" }}
-        onClick={() => setLoginPage(!loginPage)}
+        onClick={() => setSignUpPage(!signUpPage)}
       >
-        {loginPage
+        {signUpPage
           ? "Already have an account? Login here"
           : "Don't have an acccount yet? Create one here!"}
       </Button>
       <Box
         component="form"
         className="sign-in-sign-up-form"
-        onSubmit={formik.handleSubmit}
+        onSubmit={async (values) => {
+          if (!signUpPage) {
+            const formData = {
+              username: values.username,
+              password: values.password,
+            };
+            await axios
+              .post(`/api/users/login`, formData)
+              .then((data) => {
+                if (data.token) {
+                  localStorage.setItem("token", data.token);
+                } else {
+                  alert(data);
+                }
+              })
+              .catch((err) => console.error(err));
+          } else {
+            const formData = {
+              username: values.username,
+              email: values.email,
+              password: values.password,
+              name: values.name,
+            };
+
+            await axios
+              .post(`/api/users/signup`, formData)
+              .then((data) => {
+                if (data.token) {
+                  localStorage.setItem("token", data.token);
+                } else {
+                  alert(data);
+                }
+              })
+              .catch((err) => console.error(err));
+          }
+        }}
       >
-        {loginPage ? (
+        {signUpPage ? (
           <AnimatePresence>
             <TextField
               onChange={formik.handleChange}
