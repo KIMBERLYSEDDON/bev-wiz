@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Box, Typography } from "@mui/material/";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Box, Typography, CircularProgress } from "@mui/material/";
+
+import BevWizHeader from "../../components/header/header.component";
 import ActionAreaCard from "../../components/card/ActionAreaCard.component";
 
 import useGeoLocation from "../../hooks/useGeoLocation";
+
+import "./night-out.styles.scss";
 
 export default function NightOut() {
   const [nightOutLocations, setNightOutLocations] = useState();
@@ -26,10 +29,11 @@ export default function NightOut() {
       .catch((err) => {
         console.log(err);
       });
-  }, [coordinates]);
+  }, [coordinates, nightOutLocations]);
 
   return (
-    <Box className="side-display">
+    <Box className="side-display night-out">
+      <BevWizHeader />
       <Typography variant="h1">Night Out Page Here</Typography>
 
       <Box
