@@ -8,6 +8,8 @@ import { gapi } from "gapi-script";
 
 import { useFormik } from "formik";
 
+import axios from "axios";
+
 import "./sign-in.styles.scss";
 
 const googleClientId =
@@ -61,15 +63,32 @@ export default function SignIn() {
     console.log(res);
   };
   const onSuccess = (res) => {
+    // TODO: create token
     console.log("hit", res.profileObj);
   };
+
   return (
     <Box className="sign-in">
       <Typography variant="h3">Sign In</Typography>
       <Box
         component="form"
         className="sign-in-form"
-        onSubmit={formik.handleSubmit}
+        onSubmit={async ( values ) => {
+          const formData = {
+              username: values.username,
+              password: values.password,
+          }
+
+          await axios.post(`/api/users/login`, formData)
+            .then((data) => {
+              if (data.token) {
+                localStorage.setItem("token", data.token);
+              } else {
+                alert(data);
+              }
+            })
+            .catch((err => console.error(err)));
+        }}
       >
         <TextField
           onChange={formik.handleChange}
